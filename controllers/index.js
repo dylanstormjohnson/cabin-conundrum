@@ -7,10 +7,3 @@ router.use('/api', apiRoutes);
 router.use('/', pageRouts);
 
 module.exports = router;
-
-/*
-    User: 
-        /login
-        /register
-        /HighScores
-*/
