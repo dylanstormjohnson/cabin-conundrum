@@ -4,8 +4,9 @@ const { User } = require('../../models');
 // register
 router.post('/', async (req, res) => {
   try {
+    const { username, password } = req.body;
     const existingUser = await User.findOne({
-      where: { username: req.body.username },
+      where: { username },
     });
 
     // prevent user from registering with same username
@@ -13,6 +14,12 @@ router.post('/', async (req, res) => {
       return res
         .status(400)
         .json({ message: 'User already exist, chose a new username' });
+
+    // check if passwords length > 8
+    if (password.length < 8)
+      return res
+        .status(400)
+        .json({ message: 'Password must be greater or equal to 8 characters' });
 
     // req.body = {username, password}
     const userData = await User.create(req.body);
