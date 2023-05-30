@@ -80,15 +80,15 @@ const signupFormHandler = async (event) => {
     if (!response.ok) {
       const res = await response.json();
       console.log(res);
-      const errorMsg = res.errors[0].message;
+      const errorMsg = res.message;
       showError(signupFormEl, errorMsg);
       return;
     }
 
     document.location.replace('/home');
   } catch (err) {
-    console.log(err);
-    showError(signupFormEl, 'A signup error has ocurred.');
+    console.log('ERROR', err);
+    showError(signupFormEl, err.message);
   }
 };
 
