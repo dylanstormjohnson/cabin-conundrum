@@ -3,7 +3,11 @@
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>Cabin Conundrum</title>
-
+    <link
+      rel='shortcut icon'
+      href='/images/Cabin_Conundrum_Logo.png'
+      type='image/x-icon'
+    />
     <link
       rel='stylesheet'
       href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
@@ -17,11 +21,19 @@
           <h1>
             {{#if logged_in}}
               <a href='/home'>
-                <img alt='logo' id='logo' src='/images/logo.png' />
+                <img
+                  alt='logo'
+                  id='logo'
+                  src='/images/Cabin_Conundrum_Logo.png'
+                />
               </a>
             {{else}}
               <a href='/'>
-                <img alt='logo' id='logo' src='/images/logo.png' />
+                <img
+                  alt='logo'
+                  id='logo'
+                  src='/images/Cabin_Conundrum_Logo.png'
+                />
               </a>
             {{/if}}
           </h1>
@@ -30,9 +42,9 @@
             {{#if logged_in}}
               <a href='/home'>home</a>
               <a href='/profile'>profile</a>
-              <button class='btn' class='' id='logout'>logout</button>
+              <button class='main-btn' class='' id='logout'>logout</button>
             {{else}}
-              <a class='btn' href='/login'>Login or Sign-up</a>
+              <a class='main-btn' href='/login'>Login or Sign-up</a>
             {{/if}}
           </nav>
         </header>
