@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+header {
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+}
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+header nav a {
+  color: #614920;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+.main-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #614920;
+  color: black;
+}
+#logo {
+  width: 100px;
+  border-radius: 10px;
+}
+
+.login-container {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+    url('https://tinyhousetalk.com/wp-content/uploads/2c535000db033224820f_ryWu1.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 2px solid gray;
+  height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
