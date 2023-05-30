@@ -13,23 +13,22 @@ const removeAllErrors = () => {
   allErrors.forEach((el) => el.remove());
 };
 
-
 const loginFormHandler = async (event) => {
   event.preventDefault();
   removeAllErrors();
 
-  const email = document.querySelector('#email-login').value.trim();
+  const username = document.querySelector('#username-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
-  if (!email || !password) {
-    showError(loginFormEl, "Please provide both an email and password.")
+  if (!username || !password) {
+    showError(loginFormEl, 'Please provide both a username and password.');
     return;
   }
 
   const bodyObj = {
-    email,
-    password
-  }
+    username,
+    password,
+  };
 
   try {
     const response = await fetch('/api/users/login', {
@@ -49,7 +48,7 @@ const loginFormHandler = async (event) => {
     document.location.replace('/home');
   } catch (err) {
     console.log(err);
-    showError(loginFormEl, "A login error has ocurred.")
+    showError(loginFormEl, 'A login error has ocurred.');
   }
 };
 
@@ -57,20 +56,16 @@ const signupFormHandler = async (event) => {
   event.preventDefault();
   removeAllErrors();
 
-  const first_name = document.querySelector('#first-name-signup').value.trim();
-  const last_name = document.querySelector('#last-name-signup').value.trim();
-  const email = document.querySelector('#email-signup').value.trim();
+  const username = document.querySelector('#username-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
 
   const bodyObj = {
-    first_name,
-    last_name,
-    email,
-    password
-  }
+    username,
+    password,
+  };
 
-  if (!first_name || !last_name || !email || !password) {
-    console.log(bodyObj)
+  if (!username || !password) {
+    console.log(bodyObj);
     showError(signupFormEl, 'Please fill out all fields.');
     return;
   }
@@ -85,15 +80,15 @@ const signupFormHandler = async (event) => {
     if (!response.ok) {
       const res = await response.json();
       console.log(res);
-      const errorMsg = res.errors[0].message;
+      const errorMsg = res.message;
       showError(signupFormEl, errorMsg);
       return;
     }
 
     document.location.replace('/home');
   } catch (err) {
-    console.log(err);
-    showError(signupFormEl, "A signup error has ocurred.");
+    console.log('ERROR', err);
+    showError(signupFormEl, err.message);
   }
 };
 
