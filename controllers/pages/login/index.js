@@ -7,8 +7,7 @@ router.get('/', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('login', { showLogin: true });
 });
-
 
 module.exports = router;
