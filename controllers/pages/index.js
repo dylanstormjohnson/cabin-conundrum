@@ -6,10 +6,13 @@ const profile = require('./profile');
 const home = require('./home');
 const login = require('./login');
 const game = require('./game')
+const highscores = require('./highscores');
 
 router.use('/profile', withAuth, profile);
 
 router.use('/home', withAuth, home);
+
+router.use('/highscores', withAuth, highscores);
 
 router.use('/login', login);
 

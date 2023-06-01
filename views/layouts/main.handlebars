@@ -5,7 +5,7 @@
     <title>Cabin Conundrum</title>
     <link
       rel='shortcut icon'
-      href='/images/Cabin_Conundrum_Logo.png'
+      href='/images/Logo/Cabin_Conundrum_Logo.png'
       type='image/x-icon'
     />
     <link
@@ -41,7 +41,12 @@
             <!-- Conditionally render login or logout links -->
             {{#if logged_in}}
               <a href='/home'>Home</a>
-              <a href='/profile'>Profile</a>
+              <a href='/highscores'>Highscores</a>
+              {{#if username}}
+                <a href='/profile'>Profile: {{username}}</a>
+              {{else}}
+                <a href='/profile'>Profile</a>
+              {{/if}}
               <button class='main-btn' class='' id='logout'>Logout</button>
             {{else}}
               <a class='main-btn' href='/login'>Login or Sign-up</a>
