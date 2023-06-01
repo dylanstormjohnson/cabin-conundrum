@@ -16,44 +16,45 @@
   </head>
   <body>
     <div class=''>
-      {{#if showLogin}}{{else}}
-        <header class=''>
-          <h1>
-            {{#if logged_in}}
-              <a href='/home'>
-                <img
-                  alt='logo'
-                  id='logo'
-                  src='/images/Logo/Cabin_Conundrum_Logo.png'
-                />
-              </a>
+
+      <header class=''>
+        <h1>
+          {{#if logged_in}}
+            <a href='/home'>
+              <img
+                alt='logo'
+                id='logo'
+                src='/images/Logo/Cabin_Conundrum_Logo.png'
+              />
+            </a>
+          {{else}}
+            <a href='/'>
+              <img
+                alt='logo'
+                id='logo'
+                src='/images/Logo/Cabin_Conundrum_Logo.png'
+              />
+            </a>
+          {{/if}}
+        </h1>
+        <nav>
+          <!-- Conditionally render login or logout links -->
+          <a href='/'>Welcome!</a>
+          {{#if logged_in}}
+            <a href='/home'>Home</a>
+            <a href='/highscores'>Highscores</a>
+            {{#if username}}
+              <a href='/profile'>Profile: {{username}}</a>
             {{else}}
-              <a href='/'>
-                <img
-                  alt='logo'
-                  id='logo'
-                  src='/images/Logo/Cabin_Conundrum_Logo.png'
-                />
-              </a>
+              <a href='/profile'>Profile</a>
             {{/if}}
-          </h1>
-          <nav>
-            <!-- Conditionally render login or logout links -->
-            {{#if logged_in}}
-              <a href='/home'>Home</a>
-              <a href='/highscores'>Highscores</a>
-              {{#if username}}
-                <a href='/profile'>Profile: {{username}}</a>
-              {{else}}
-                <a href='/profile'>Profile</a>
-              {{/if}}
-              <button class='main-btn' class='' id='logout'>Logout</button>
-            {{else}}
-              <a class='main-btn' href='/login'>Login or Sign-up</a>
-            {{/if}}
-          </nav>
-        </header>
-      {{/if}}
+            <button class='main-btn' class='' id='logout'>Logout</button>
+          {{else}}
+            <a class='main-btn' href='/login'>Login or Sign-up</a>
+          {{/if}}
+        </nav>
+      </header>
+
       <main class=''>
         <!-- Render the sub layout -->
         {{{body}}}
@@ -67,6 +68,12 @@
     <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js'></script>
     <script
       src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'
+    ></script>
+    <script
+      src='https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js'
+      integrity='sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=='
+      crossorigin='anonymous'
+      referrerpolicy='no-referrer'
     ></script>
   </body>
 </html>
