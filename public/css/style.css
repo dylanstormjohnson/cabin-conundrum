@@ -47,3 +47,13 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+
+.roomContainer {
+  position: relative;
+}
+
+.axe {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+}
