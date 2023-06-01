@@ -9,6 +9,9 @@ header {
   justify-content: space-around;
   align-items: center;
   padding: 5px;
+  position: sticky;
+  z-index: 2;
+  top: 0;
 }
 header nav {
   display: flex;
@@ -27,7 +30,7 @@ a:hover {
   padding: 10px 20px;
   border: none;
   background-color: #614920;
-  color: black;
+  color: white
 }
 #logo {
   width: 100px;
@@ -41,7 +44,7 @@ a:hover {
   background-repeat: no-repeat;
   background-size: cover;
   border: 2px solid gray;
-  height: 100vh;
+  height: calc(100vh - 90px);
   color: white;
   display: flex;
   justify-content: center;
@@ -56,4 +59,65 @@ a:hover {
   position: absolute;
   height: 100px;
   width: 100px;
+}
+.highscores-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 90%;
+  padding: 40px 0px;
+  background: url('../images/Logo/Cabin_Conundrum_Logo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.highscores {
+  background-color: #2b210f9e;
+  min-width: 50%;
+}
+.highscores p {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid gray;
+}
+
+.welcome-container {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.3)),
+    url('https://images.mubicdn.net/images/film/79345/cache-100533-1445955708/image-w1280.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: calc(100vh - 90px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: white;
+  align-items: center;
+}
+.welcome-btns {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.welcome-btns a {
+  background-color: #614920bb;
+  padding: 20px 40px;
+  border: 4px solid black;
+  border-radius: 20px;
+  color: white;
+  text-decoration: none;
+  transition: 0.2s ease-in-out;
+}
+.welcome-btns a:hover {
+  transform: scale(1.2);
+}
+.welcome-container p {
+  width: 50%;
+}
+.box {
+  width: 150px;
+  height: 150px;
+  background-color: rgb(98, 37, 10);
 }

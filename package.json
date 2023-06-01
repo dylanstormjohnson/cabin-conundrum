@@ -9,10 +9,12 @@
     "seed": "node seeds/seed.js",
     "start:dev": "nodemon server.js"
   },
+  "type": "commonjs",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "anime": "^0.1.2",
     "bcrypt": "^5.0.0",
     "connect-session-sequelize": "^7.0.4",
     "dotenv": "^8.2.0",

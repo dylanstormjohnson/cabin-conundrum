@@ -5,18 +5,22 @@ const withAuth = require('../../middleware/auth');
 const profile = require('./profile');
 const home = require('./home');
 const login = require('./login');
-const game = require('./game');
+const game = require('./game')
+const highscores = require('./highscores');
 
 router.use('/profile', withAuth, profile);
 
 router.use('/home', withAuth, home);
 
+router.use('/highscores', withAuth, highscores);
+
 router.use('/login', login);
 
-router.use('/game', game)
+//need to add withAuth to line below
+router.use('/game', game);
 
 router.get('/', (req, res) => {
-  return res.render('welcome');
+  res.render('welcome', { logged_in: req.session.logged_in });
 });
 
 module.exports = router;

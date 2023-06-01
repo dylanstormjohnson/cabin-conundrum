@@ -1,0 +1,12 @@
+<div class='highscores-container'>
+  <h1>High Scores</h1>
+  <div class='highscores'>
+    {{#if highScores.length}}
+      {{#each highScores as |score|}}
+        <p>{{score.user.username}} - {{score.time}}</p>
+      {{/each}}
+    {{else}}
+      <p>No scores yet!</p>
+    {{/if}}
+  </div>
+</div>

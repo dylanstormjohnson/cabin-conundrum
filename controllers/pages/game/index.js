@@ -1,7 +1,11 @@
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
-  res.render('game');
+router.get('/', async (req, res) => {
+  try {
+    res.render('game', {
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
-
-module.exports = router
