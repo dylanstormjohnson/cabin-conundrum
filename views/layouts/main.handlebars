@@ -42,7 +42,11 @@
             {{#if logged_in}}
               <a href='/home'>Home</a>
               <a href='/highscores'>Highscores</a>
-              <a href='/profile'>Profile</a>
+              {{#if username}}
+                <a href='/profile'>Profile: {{username}}</a>
+              {{else}}
+                <a href='/profile'>Profile</a>
+              {{/if}}
               <button class='main-btn' class='' id='logout'>Logout</button>
             {{else}}
               <a class='main-btn' href='/login'>Login or Sign-up</a>

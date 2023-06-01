@@ -51,10 +51,22 @@ a:hover {
 .highscores-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: #614920;
+  justify-content: center;
   color: white;
+  height: 90%;
+  padding: 40px 0px;
+  background: url('../images/Logo/Cabin_Conundrum_Logo.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 .highscores {
+  background-color: #2b210f9e;
+  min-width: 50%;
+}
+.highscores p {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid gray;
 }
