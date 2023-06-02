@@ -1,4 +1,4 @@
-const myAnimation = anime({
+anime({
   targets: 'path',
   strokeDashoffset: [anime.setDashoffset, 0],
   easing: 'easeInOutSine',
