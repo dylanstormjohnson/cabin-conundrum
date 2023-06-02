@@ -56,12 +56,81 @@ a:hover {
   z-index: 1;
 }
 
+.message {
+  position: absolute;
+  color: white;
+  top: 85%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  font-family: 'IM Fell English SC', serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+
 .axe {
   position: absolute;
-  height: 112px;
+  height: 19%;
   width: auto;
+  top: 9%;
+  left: 12%;
   z-index: 2;
 }
+
+.axe_cover {
+  position: absolute;
+  height: 5%;
+  width: auto;
+  top: 10.5%;
+  left: 11.75%;
+  z-index: 3;
+}
+
+.trapdoor_closed {
+  position: absolute;
+  height: 14%;
+  width: auto;
+  top: 80%;
+  left: 8.5%;
+  z-index: 2;
+}
+
+.trapdoor_opened {
+  position: absolute;
+  height: 37%;
+  width: auto;
+  top: 57%;
+  left: 8%;
+  z-index: 2;
+}
+
+.hardwoodDoor_closed {
+  position: absolute;
+  height: 31%;
+  width: auto;
+  top: 37.5%;
+  left: 70.5%;
+  z-index: 2;
+}
+
+.hardwoodDoor_broken {
+  position: absolute;
+  height: 31%;
+  width: auto;
+  top: 37.5%;
+  left: 70.5%;
+  z-index: 2;
+}
+
+.arrowLRtoK {
+  position: absolute;
+  height: 10.5%;
+  width: auto;
+  top: 38.5%;
+  left: 85%;
+  z-index: 2;
+}
+
 .highscores-container {
   display: flex;
   flex-direction: column;
