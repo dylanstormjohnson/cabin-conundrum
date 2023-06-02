@@ -1,4 +1,40 @@
-<h2>
-  Hello
-  {{first_name}}, this is your profile page. Please change me or remove me.
-</h2>
+<div class='login-container'>
+  <div class='container col-md-6'>
+
+    <form id='update-username-form'>
+      <h2>Update Username: {{username}}</h2>
+      <div class='form-group'>
+        <input hidden type='text' id='{{user_id}}' />
+        <input
+          value='{{username}}'
+          class='form-control'
+          type='text'
+          id='username-update'
+        />
+      </div>
+      <div class='form-group'>
+        <button class='main-btn' type='submit'>Update Username</button>
+      </div>
+    </form>
+
+    <form id='update-password-form'>
+      <h2>Update Password:</h2>
+      <input hidden type='text' id='{{user_id}}' />
+      <div class='form-group'>
+        <label for='password-update'>New Password:</label>
+        <input class='form-control' type='password' id='password-update' />
+      </div>
+      <div class='form-group'>
+        <label for='confirm-password-update'>Confirm Password:</label>
+        <input
+          class='form-control'
+          type='password'
+          id='confirm-password-update'
+        />
+      </div>
+      <div class='form-group'>
+        <button class='main-btn' type='submit'>Update Password</button>
+      </div>
+    </form>
+  </div>
+</div>
