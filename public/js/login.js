@@ -45,7 +45,7 @@ const loginFormHandler = async (event) => {
       return;
     }
 
-    document.location.replace('/home');
+    window.location.href = '/';
   } catch (err) {
     console.log(err);
     showError(loginFormEl, 'A login error has ocurred.');
@@ -85,7 +85,7 @@ const signupFormHandler = async (event) => {
       return;
     }
 
-    document.location.replace('/home');
+    window.location.href = '/';
   } catch (err) {
     console.log('ERROR', err);
     showError(signupFormEl, err.message);

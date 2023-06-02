@@ -30,7 +30,7 @@ a:hover {
   padding: 10px 20px;
   border: none;
   background-color: #614920;
-  color: white
+  color: white;
 }
 #logo {
   width: 100px;
@@ -186,6 +186,7 @@ a:hover {
 }
 .welcome-container p {
   width: 50%;
+  text-align: justify;
 }
 .box {
   width: 150px;
