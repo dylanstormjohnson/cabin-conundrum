@@ -131,6 +131,51 @@ a:hover {
   z-index: 2;
 }
 
+.basement_key {
+  position: absolute;
+  height: 2.5%;
+  width: auto;
+  top: 29%;
+  left: 8.3%;
+  z-index: 2;
+}
+
+.arrowKtoLR {
+  position: absolute;
+  height: 9%;
+  width: auto;
+  top: 80%;
+  left: 42.75%;
+  z-index: 2;
+}
+
+.drawer_closed {
+  position: absolute;
+  height: 4.25%;
+  width: auto;
+  top: 44%;
+  left: 44.5%;
+  z-index: 2;
+}
+
+.drawer_opened {
+  position: absolute;
+  height: 6.25%;
+  width: auto;
+  top: 44.5%;
+  left: 44.75%;
+  z-index: 2;
+}
+
+.note_with_passcode {
+  position: absolute;
+  height: 2.35%;
+  width: auto;
+  top: 46%;
+  left: 46.6%;
+  z-index: 3;
+}
+
 .highscores-container {
   display: flex;
   flex-direction: column;
