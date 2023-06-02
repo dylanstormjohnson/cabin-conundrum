@@ -71,7 +71,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// update username
+// update username working
 router.put('/username/:id', async (req, res) => {
   try {
     const { username } = req.body;
