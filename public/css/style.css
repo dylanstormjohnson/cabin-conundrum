@@ -51,6 +51,17 @@ a:hover {
   align-items: center;
 }
 
+.roomContainer {
+  position: relative;
+  z-index: 1;
+}
+
+.axe {
+  position: absolute;
+  height: 112px;
+  width: auto;
+  z-index: 2;
+}
 .highscores-container {
   display: flex;
   flex-direction: column;
