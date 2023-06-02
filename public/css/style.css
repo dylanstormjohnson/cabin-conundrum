@@ -53,12 +53,14 @@ a:hover {
 
 .roomContainer {
   position: relative;
+  z-index: 1;
 }
 
 .axe {
   position: absolute;
-  height: 100px;
-  width: 100px;
+  height: 112px;
+  width: auto;
+  z-index: 2;
 }
 .highscores-container {
   display: flex;

@@ -1,10 +1,11 @@
 // const anime = require('animejs');
-let currentRoom = document.querySelector('#gameSpace');
+let currentRoom = $('#gameSpace');
+let gameSpace = $('.roomContainer');
 
-currentRoom.addEventListener('click', function (event) {
-  if (currentRoom.getAttribute('alt') === "Logo") {
-    currentRoom.setAttribute('alt', "Living Room");
-    currentRoom.setAttribute('src', "/images/Places/Living_Room.png");
+currentRoom.on('click', function (event) {
+  if (currentRoom.attr('alt') === "Logo") {
+    currentRoom.attr('alt', "Living Room");
+    currentRoom.attr('src', "/images/Places/Living_Room.png");
     determineRoomItems();
   };
 });
@@ -12,7 +13,7 @@ currentRoom.addEventListener('click', function (event) {
 
 
 const determineRoomItems = () => {
-  switch (currentRoom.getAttribute('alt')) {
+  switch (currentRoom.attr('alt')) {
     case 'Living Room':
       fillLivingRoom();
       break;
@@ -20,16 +21,22 @@ const determineRoomItems = () => {
 }
 
 const fillLivingRoom = () => {
-  const axe = document.createElement('img')
-  axe.setAttribute('src', '/images/Sprites/In_Living_Room/Axe.png');
-  axe.setAttribute('alt', 'Axe');
-  axe.setAttribute('class', 'axe ');
-  currentRoom.appendChild(axe);
+  const axe = $('<img>')
+  axe.attr('src', '/images/Sprites/In_Living_Room/Axe.png');
+  axe.attr('alt', 'Axe');
+  axe.addClass('axe');
+  // axe.css = 'auto';
+  // axe.css = '1000px';
+  gameSpace.append(axe);
 
 }
 
+$(document).on('click', ".axe", () => {
+  console.log('axe clicked')
+})
+
 // anime({
-//   targets: '.my-element',
+//   targets: '.axe',
 //   opacity: 0.5,
 //   duration: 1000,
 //   easing: 'easeInOutQuad',
