@@ -1,15 +1,12 @@
-<div class='gamePlayContainer container-fluid'>
-  <div id="row">
-    <div class='roomContainer col-lg-9'>
-      {{#each room as |room|}}
-      <p>
-        {{room.id}}
-      </p>
-      {{/each}}
+<div class='gamePlayContainer container-fluid bg-primary h-100'>
+  <div class="row h-75">
+    <div class="col-2 p-0 bg-secondary" ></div>
+    <div class='roomContainer col-6 bg-secondary p-0 d-flex'>
+      <img src="/images/Logo/Cabin_Conundrum_Logo.png" alt="Logo" id="gameSpace" class="p-0"></img>
     </div>
-    <aside class='inventoryContainer float-right col-lg-3'>
+    <aside class='inventoryContainer col-2 bg-danger p-0'>
       <ul>
-        Available Items
+        Inventory
         <li>
           {{inventory.id}}
           {{item_name}}
@@ -17,5 +14,8 @@
         {{!-- add an item selector? --}}
       </ul>
     </aside>
+    <div class="col-2 p-0 bg-secondary"></div>
   </div>
 </div>
+      {{!-- <script src='anime.min.js'></script> --}}
+      <script src='/js/gameplay.js'></script>
