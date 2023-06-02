@@ -10,4 +10,3 @@ const myAnimation = anime({
   loop: true,
   autoplay: true,
 });
-
