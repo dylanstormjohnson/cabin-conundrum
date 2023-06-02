@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
       nest: true,
     });
 
+    console.log(userData);
     res.render('profile', {
       ...userData,
       logged_in: req.session.logged_in,
