@@ -3,6 +3,7 @@
 
 const playerObj = {
   inventory: [],
+  usedItems: [],
   hardwoodDoor: 'Closed',
   trapdoor: 'Closed',
   drawer: 'Closed',
@@ -23,7 +24,18 @@ const message = (description) => {
 
     messageTime = setTimeout(() => {
       clearMessage();
-    }, 4000);
+    }, 3000);
+  } else {
+    $('.message').remove();
+    clearTimeout(messageTime);
+    isMessage = true;
+    const messageHTML = `<p class='message'>${description}</p>`;
+
+    gameSpace.append(messageHTML);
+
+    messageTime = setTimeout(() => {
+      clearMessage();
+    }, 3000);
   }
 };
 
@@ -93,25 +105,55 @@ const fillLivingRoom = () => {
   }
 };
 
-// const fillKitchen = () => {
-//   if (!playerObj.inventory.includes('Basement_Key')) {
-//     addBasementKey();
-//   }
+const fillKitchen = () => {
+  if (
+    !playerObj.inventory.includes('Basement Key') &&
+    !playerObj.usedItems.includes('Basement Key')
+  ) {
+    addBasementKey();
+  };
 
-//   addAxeCover();
+  addArrowKToLR();
 
-//   if (playerObj.trapdoor !== 'Opened') {
-//     addClosedTrapdoor();
-//   } else {
-//     addOpenedTrapdoor();
-//   }
+  if (playerObj.drawer !== 'Opened') {
+    addClosedDrawer();
+  } else {
+    addOpenedDrawer();
+    if (!playerObj.inventory.includes('Note With Passcode') && !playerObj.usedItems.includes('Note With Passcode')
+    ) {
+      addNoteWithPasscode();
+    };
+  };
+};
 
-//   if (playerObj.hardwoodDoor !== 'Broken') {
-//     addClosedHardwoodDoor();
-//   } else {
-//     addBrokenHardwoodDoor();
-//   }
-// };
+const fillBasement = () => {
+  if (!playerObj.inventory.includes('Shovel')) {
+    // addShovel();
+  }
+
+  // addArrowBToLR();
+
+  if (playerObj.dirtMound !== 'Dug') {
+    // addUndugDirtMound();
+  } else {
+    // addDugDirtMound();
+    if (
+      !playerObj.inventory.includes('Drawer Key') &&
+      !playerObj.usedItems.includes('Drawer Key')
+    ) {
+      // addDrawerKey();
+    }
+  }
+
+  if (playerObj.safe !== 'Opened') {
+    // addClosedSafe();
+  } else {
+    // addOpenedSafe();
+    if (!playerObj.inventory.includes('Rope')) {
+      // addRope();
+    }
+  }
+};
 
 const addAxe = () => {
   const axe = $('<img>');
@@ -169,17 +211,52 @@ const addBrokenHardwoodDoor = () => {
 const addArrowLRToK = () => {
   const arrow = $('<img>');
   arrow.attr('src', '/images/Sprites/In_Living_Room/Arrow_To_Kitchen.png');
-  arrow.attr('alt', 'Hardwood Door');
-  arrow.addClass('ArrowLRToK');
+  arrow.attr('alt', 'Arrow from Living Room to Kitchen');
+  arrow.addClass('arrowLRtoK');
   gameSpace.append(arrow);
+};
+
+const addBasementKey = () => {
+  const basementKey = $('<img>');
+  basementKey.attr('src', '/images/Sprites/In_Kitchen/Basement_Key.png');
+  basementKey.attr('alt', 'Basement Key');
+  basementKey.addClass('basement_key');
+  gameSpace.append(basementKey);
 };
 
 const addArrowKToLR = () => {
   const arrow = $('<img>');
-  arrow.attr('src', '/images/Sprites/In_Living_Room/Arrow_To_Kitchen.png');
-  arrow.attr('alt', 'Hardwood Door');
-  arrow.addClass('ArrowLRToK');
+  arrow.attr('src', '/images/Sprites/In_Kitchen/Arrow_To_Living_Room.png');
+  arrow.attr('alt', 'Arrow from Kitchen to Living Room');
+  arrow.addClass('arrowKtoLR');
   gameSpace.append(arrow);
+};
+
+const addClosedDrawer = () => {
+  const drawer = $('<img>');
+  drawer.attr('src', '/images/Sprites/In_Kitchen/Drawer_Closed.png');
+  drawer.attr('alt', 'Drawer');
+  drawer.addClass('drawer_closed');
+  gameSpace.append(drawer);
+};
+
+const addOpenedDrawer = () => {
+  const drawer = $('<img>');
+  drawer.attr('src', '/images/Sprites/In_Kitchen/Drawer_Opened.png');
+  drawer.attr('alt', 'Drawer');
+  drawer.addClass('drawer_opened');
+  gameSpace.append(drawer);
+};
+
+const addNoteWithPasscode = () => {
+  const noteWithPasscode = $('<img>');
+  noteWithPasscode.attr(
+    'src',
+    '/images/Sprites/In_Kitchen/Note_With_Passcode.png'
+  );
+  noteWithPasscode.attr('alt', 'Note With Passcode');
+  noteWithPasscode.addClass('note_with_passcode');
+  gameSpace.append(noteWithPasscode);
 };
 
 $(document).on('click', '.axe', () => {
@@ -191,21 +268,35 @@ $(document).on('click', '.hardwoodDoor_closed', () => {
 });
 
 $(document).on('click', '.trapdoor_closed', () => {
-  message(`Locked... darn.`);
+  if (!playerObj.inventory.includes("Basement Key")) {
+    message(`Locked... darn.`);
+  } else {
+    message(`Basement door unlocked!`);
+    let index = playerObj.inventory.indexOf("Basement Key");
+    playerObj.inventory.splice(index, 1);
+    console.log(playerObj.inventory)
+    playerObj.usedItems.push("Basement Key")
+    console.log(playerObj.usedItems)
+    playerObj.trapdoor = "Opened"
+    $('.trapdoor_closed').remove()
+    addOpenedTrapdoor();
+  };
 });
 
-$(document).on('mouseenter', '.ArrowLRToK', () => {
+$(document).on('mouseenter', '.arrowLRtoK', () => {
   shortMessage(`To Kitchen`);
 });
 
-$(document).on('mouseleave', '.ArrowLRToK', () => {
+$(document).on('mouseleave', '.arrowLRtoK', () => {
   clearMessage();
 });
 
-$(document).on('click', '.ArrowLRToK', () => {
+$(document).on('click', '.arrowLRtoK', () => {
   clearMessage();
   currentRoom.attr('alt', 'Kitchen');
   currentRoom.attr('src', '/images/Places/Kitchen.png');
+  // currentRoom.attr('src', '/dev_notes/Placement_References/Kitchen_Reference_All_Closed.png');
+  // currentRoom.attr('src', '/dev_notes/Placement_References/Kitchen_Reference_All_Opened.png');
   if (!playerObj.inventory.includes('Axe')) {
     $('.axe').remove();
   }
@@ -218,6 +309,82 @@ $(document).on('click', '.ArrowLRToK', () => {
   } else {
     $('.trapdoor_opened').remove();
   }
+
+  if (playerObj.hardwoodDoor !== 'Broken') {
+    $('.hardwoodDoor_closed').remove();
+  } else {
+    $('.hardwoodDoor_broken').remove();
+  }
+  determineRoomItems();
+});
+
+$(document).on('click', '.basement_key', () => {
+  message(`Basement Key found!`);
+  $('.basement_key').remove();
+  playerObj.inventory.push('Basement Key');
+  console.log(playerObj.inventory);
+});
+
+$(document).on('mouseenter', '.arrowKtoLR', () => {
+  shortMessage(`To Living Room`);
+});
+
+$(document).on('mouseleave', '.arrowKtoLR', () => {
+  clearMessage();
+});
+
+$(document).on('click', '.arrowKtoLR', () => {
+  clearMessage();
+  currentRoom.attr('alt', 'Living Room');
+  currentRoom.attr('src', '/images/Places/Living_Room.png');
+  if (!playerObj.inventory.includes('Basement Key')) {
+    $('.basement_key').remove();
+  }
+
+  $('.arrowKtoLR').remove();
+
+  if (playerObj.drawer !== 'Opened') {
+    $('.drawer_closed').remove();
+  } else {
+    $('.drawer_opened').remove();
+    $('.note_with_passcode').remove();
+  }
+
+  determineRoomItems();
+});
+
+$(document).on('click', '.drawer_closed', () => {
+  message(`Locked! Why is everything locked?`);
+});
+
+$(document).on('click', '.note_with_passcode', () => {
+  message(`Note with passcode found!`);
+  $('.note_with_passcode').remove();
+  playerObj.inventory.push('Note With Passcode');
+  console.log(playerObj.inventory);
+});
+
+$(document).on('mouseenter', '.trapdoor_opened', () => {
+  shortMessage(`To Basement`);
+});
+
+$(document).on('mouseleave', '.trapdoor_opened', () => {
+  clearMessage();
+});
+
+$(document).on('click', '.trapdoor_opened', () => {
+  clearMessage();
+  currentRoom.attr('alt', 'Basement');
+  currentRoom.attr('src', '/images/Places/Basement.png');
+  // currentRoom.attr('src', '/dev_notes/Placement_References/Basement_Reference_All_Closed.png');
+  // currentRoom.attr('src', '/dev_notes/Placement_References/Basement_Reference_All_Opened.png');
+  if (!playerObj.inventory.includes('Axe')) {
+    $('.axe').remove();
+  }
+
+  $('.axe_cover').remove();
+  $('.arrowLRtoK').remove();
+  $('.trapdoor_opened').remove();
 
   if (playerObj.hardwoodDoor !== 'Broken') {
     $('.hardwoodDoor_closed').remove();
