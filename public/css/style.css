@@ -104,7 +104,7 @@ a:hover {
   z-index: 2;
 }
 
-.hardwoodDoor_closed {
+.hardwood_door_closed {
   position: absolute;
   height: 31%;
   width: auto;
@@ -113,7 +113,7 @@ a:hover {
   z-index: 2;
 }
 
-.hardwoodDoor_broken {
+.hardwood_door_broken {
   position: absolute;
   height: 31%;
   width: auto;
@@ -174,6 +174,78 @@ a:hover {
   top: 46%;
   left: 46.6%;
   z-index: 3;
+}
+
+.arrowBtoLR {
+  position: absolute;
+  height: 8.5%;
+  width: auto;
+  top: 48%;
+  left: 27.25%;
+  z-index: 2;
+}
+
+.dirt_mound {
+  position: absolute;
+  height: 10%;
+  width: auto;
+  top: 88.5%;
+  left: 30%;
+  z-index: 2;
+}
+
+.shovel {
+  position: absolute;
+  height: 47%;
+  width: auto;
+  top: 50%;
+  left: 65.75%;
+  z-index: 2;
+}
+
+.safe_closed {
+  position: absolute;
+  height: 24%;
+  width: auto;
+  top: 25%;
+  left: 46%;
+  z-index: 2;
+}
+
+.drawer_key {
+  position: absolute;
+  height: 2%;
+  width: auto;
+  top: 94.5%;
+  left: 36%;
+  z-index: 3;
+}
+
+.rope {
+  position: absolute;
+  height: 4.5%;
+  width: auto;
+  top: 32%;
+  left: 48%;
+  z-index: 3;
+}
+
+.safe_opened {
+  position: absolute;
+  height: 24%;
+  width: auto;
+  top: 25%;
+  left: 46%;
+  z-index: 2;
+}
+
+.dirt_mound_dug {
+  position: absolute;
+  height: 10%;
+  width: auto;
+  top: 88.75%;
+  left: 26.5%;
+  z-index: 2;
 }
 
 .highscores-container {
