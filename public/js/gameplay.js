@@ -9,6 +9,7 @@ const playerObj = {
   drawer: 'Closed',
   safe: 'Closed',
   dirtMound: 'Normal',
+  axe: 'Stuck',
 };
 
 let currentRoom = $('#gameSpace');
@@ -85,7 +86,8 @@ const determineRoomItems = () => {
 };
 
 const fillLivingRoom = () => {
-  if (!playerObj.inventory.includes('Axe')) {
+  if (!playerObj.inventory.includes('Axe')
+  ) {
     addAxe();
   }
 
@@ -128,29 +130,29 @@ const fillKitchen = () => {
 
 const fillBasement = () => {
   if (!playerObj.inventory.includes('Shovel')) {
-    // addShovel();
+    addShovel();
   }
 
-  // addArrowBToLR();
+  addArrowBToLR();
 
   if (playerObj.dirtMound !== 'Dug') {
-    // addUndugDirtMound();
+    addUndugDirtMound();
   } else {
-    // addDugDirtMound();
+    addDugDirtMound();
     if (
       !playerObj.inventory.includes('Drawer Key') &&
       !playerObj.usedItems.includes('Drawer Key')
     ) {
-      // addDrawerKey();
+      addDrawerKey();
     }
   }
 
   if (playerObj.safe !== 'Opened') {
-    // addClosedSafe();
+    addClosedSafe();
   } else {
-    // addOpenedSafe();
+    addOpenedSafe();
     if (!playerObj.inventory.includes('Rope')) {
-      // addRope();
+      addRope();
     }
   }
 };
@@ -193,7 +195,7 @@ const addClosedHardwoodDoor = () => {
   const hardwoodDoor = $('<img>');
   hardwoodDoor.attr('src', '/images/Sprites/In_Living_Room/Hardwood_Door.png');
   hardwoodDoor.attr('alt', 'Hardwood Door');
-  hardwoodDoor.addClass('hardwoodDoor_closed');
+  hardwoodDoor.addClass('hardwood_door_closed');
   gameSpace.append(hardwoodDoor);
 };
 
@@ -204,7 +206,7 @@ const addBrokenHardwoodDoor = () => {
     '/images/Sprites/In_Living_Room/Hardwood_Door_Broken.png'
   );
   hardwoodDoor.attr('alt', 'Hardwood Door');
-  hardwoodDoor.addClass('hardwoodDoor_broken');
+  hardwoodDoor.addClass('hardwood_door_broken');
   gameSpace.append(hardwoodDoor);
 };
 
@@ -259,12 +261,113 @@ const addNoteWithPasscode = () => {
   gameSpace.append(noteWithPasscode);
 };
 
+const addArrowBToLR = () => {
+  const arrow = $('<img>');
+  arrow.attr('src', '/images/Sprites/In_Basement/Arrow_To_Living_Room.png');
+  arrow.attr('alt', 'Arrow from Basement to Living Room');
+  arrow.addClass('arrowBtoLR');
+  gameSpace.append(arrow);
+};
+
+const addUndugDirtMound = () => {
+  const dirtMound = $('<img>');
+  dirtMound.attr('src', '/images/Sprites/In_Basement/Dirt_Mound.png');
+  dirtMound.attr('alt', 'Dirt Mound');
+  dirtMound.addClass('dirt_mound');
+  gameSpace.append(dirtMound);
+};
+
+const addShovel = () => {
+  const shovel = $('<img>');
+  shovel.attr('src', '/images/Sprites/In_Basement/Shovel.png');
+  shovel.attr('alt', 'Shovel');
+  shovel.addClass('shovel');
+  gameSpace.append(shovel);
+};
+
+const addClosedSafe = () => {
+  const safe = $('<img>');
+  safe.attr('src', '/images/Sprites/In_Basement/Safe_Closed.png');
+  safe.attr('alt', 'Safe');
+  safe.addClass('safe_closed');
+  gameSpace.append(safe);
+};
+
+const addDrawerKey = () => {
+  const drawerKey = $('<img>');
+  drawerKey.attr('src', '/images/Sprites/In_Basement/Drawer_Key.png');
+  drawerKey.attr('alt', 'Drawer Key');
+  drawerKey.addClass('drawer_key');
+  gameSpace.append(drawerKey);
+};
+
+const addRope = () => {
+  const rope = $('<img>');
+  rope.attr('src', '/images/Sprites/In_Basement/Rope.png');
+  rope.attr('alt', 'Rope');
+  rope.addClass('rope');
+  gameSpace.append(rope);
+};
+
+const addOpenedSafe = () => {
+  const safe = $('<img>');
+  safe.attr('src', '/images/Sprites/In_Basement/Safe_Opened.png');
+  safe.attr('alt', 'Safe');
+  safe.addClass('safe_opened');
+  gameSpace.append(safe);
+};
+
+const addDugDirtMound = () => {
+  const dirtMound = $('<img>');
+  dirtMound.attr('src', '/images/Sprites/In_Basement/Dirt_Mound_Dug.png');
+  dirtMound.attr('alt', 'Dirt Mound');
+  dirtMound.addClass('dirt_mound_dug');
+  gameSpace.append(dirtMound);
+};
+
 $(document).on('click', '.axe', () => {
-  message(`I can't reach it!`);
+  if (!playerObj.inventory.includes('Rope')) {
+    message(`I can't reach it!`);
+  } else if (playerObj.axe === 'Unstuck') {
+    message(`Axe found!`);
+    $('.axe').remove();
+    playerObj.inventory.push('Axe');
+    console.log(playerObj.inventory);
+
+  } else {
+    message(`You knocked the axe down!`);
+
+    anime({
+      targets: '.axe',
+      rotateY: 50,
+      translateX: 250,
+    });
+
+
+    playerObj.axe = 'Unstuck';
+
+    // console.log(playerObj.inventory)
+    // console.log(playerObj.usedItems)
+
+    // $('.axe').remove();
+    addOpenedTrapdoor();
+  }
 });
 
-$(document).on('click', '.hardwoodDoor_closed', () => {
-  message(`It's locked...`);
+$(document).on('click', '.hardwood_door_closed', () => {
+  if (!playerObj.inventory.includes('Axe')) {
+    message(`It's locked...`);
+  } else {
+    message(`You axed the door!`);
+
+    playerObj.hardwoodDoor = 'Broken';
+
+    // console.log(playerObj.inventory)
+    // console.log(playerObj.usedItems)
+
+    $('.hardwood_door_closed').remove();
+    addBrokenHardwoodDoor();
+  }
 });
 
 $(document).on('click', '.trapdoor_closed', () => {
@@ -273,11 +376,14 @@ $(document).on('click', '.trapdoor_closed', () => {
   } else {
     message(`Basement door unlocked!`);
     let index = playerObj.inventory.indexOf("Basement Key");
+
     playerObj.inventory.splice(index, 1);
-    console.log(playerObj.inventory)
     playerObj.usedItems.push("Basement Key")
-    console.log(playerObj.usedItems)
     playerObj.trapdoor = "Opened"
+
+    // console.log(playerObj.inventory)
+    // console.log(playerObj.usedItems)
+
     $('.trapdoor_closed').remove()
     addOpenedTrapdoor();
   };
@@ -311,9 +417,9 @@ $(document).on('click', '.arrowLRtoK', () => {
   }
 
   if (playerObj.hardwoodDoor !== 'Broken') {
-    $('.hardwoodDoor_closed').remove();
+    $('.hardwood_door_closed').remove();
   } else {
-    $('.hardwoodDoor_broken').remove();
+    $('.hardwood_door_broken').remove();
   }
   determineRoomItems();
 });
@@ -347,14 +453,33 @@ $(document).on('click', '.arrowKtoLR', () => {
     $('.drawer_closed').remove();
   } else {
     $('.drawer_opened').remove();
-    $('.note_with_passcode').remove();
+    if (!playerObj.inventory.includes('Note With Passcode')) {
+      $('.note_with_passcode').remove();
+    };
+    
   }
 
   determineRoomItems();
 });
 
 $(document).on('click', '.drawer_closed', () => {
-  message(`Locked! Why is everything locked?`);
+  if (!playerObj.inventory.includes('Drawer Key')) {
+    message(`Locked! Why is everything locked?`);
+  } else {
+    message(`Safe unlocked!`);
+    let index = playerObj.inventory.indexOf('Drawer Key');
+
+    playerObj.inventory.splice(index, 1);
+    playerObj.usedItems.push('Drawer Key');
+    playerObj.drawer = 'Opened';
+
+    // console.log(playerObj.inventory)
+    // console.log(playerObj.usedItems)
+
+    $('.drawer_closed').remove();
+    addOpenedDrawer();
+    addNoteWithPasscode();
+  }
 });
 
 $(document).on('click', '.note_with_passcode', () => {
@@ -387,11 +512,114 @@ $(document).on('click', '.trapdoor_opened', () => {
   $('.trapdoor_opened').remove();
 
   if (playerObj.hardwoodDoor !== 'Broken') {
-    $('.hardwoodDoor_closed').remove();
+    $('.hardwood_door_closed').remove();
   } else {
-    $('.hardwoodDoor_broken').remove();
+    $('.hardwood_door_broken').remove();
   }
   determineRoomItems();
+});
+
+$(document).on('mouseenter', '.arrowBtoLR', () => {
+  shortMessage(`To Living Room`);
+});
+
+$(document).on('mouseleave', '.arrowBtoLR', () => {
+  clearMessage();
+});
+
+$(document).on('click', '.arrowBtoLR', () => {
+  clearMessage();
+  currentRoom.attr('alt', 'Living Room');
+  currentRoom.attr('src', '/images/Places/Living_Room.png');
+
+  if (!playerObj.inventory.includes('Shovel')) {
+    $('.shovel').remove();
+  };
+
+  $('.arrowBtoLR').remove();
+
+  if (playerObj.dirtMound !== 'Dug') {
+    $('.dirt_mound').remove();
+  } else {
+    $('.dirt_mound_dug').remove();
+    if (!playerObj.inventory.includes('Drawer Key')) {
+      $('.drawer_key').remove();
+    }
+  };
+
+  if (playerObj.safe !== 'Opened') {
+    $('.safe_closed').remove();
+  } else {
+    $('.safe_opened').remove();
+    if (!playerObj.inventory.includes('Rope')) {
+      $('.rope').remove();
+    };
+  };
+
+  determineRoomItems();
+});
+
+$(document).on('click', '.dirt_mound', () => {
+  
+  if (!playerObj.inventory.includes('Shovel')) {
+    message(`Looks fresh, I feel uneasy.`);
+  } else {
+    message(`You dug something up!`);
+
+    playerObj.dirtMound = 'Dug';
+
+    // console.log(playerObj.inventory)
+    // console.log(playerObj.usedItems)
+
+    $('.dirt_mound').remove();
+    addDugDirtMound();
+    addDrawerKey();
+  }
+});
+
+$(document).on('click', '.shovel', () => {
+  message(`Shovel found!`);
+  $('.shovel').remove();
+  playerObj.inventory.push('Shovel');
+  console.log(playerObj.inventory);
+});
+
+$(document).on('click', '.safe_closed', () => {
+    if (!playerObj.inventory.includes("Note With Passcode")) {
+    message(`I don't know the combination.`);
+  } else {
+    message(`Safe unlocked!`);
+    let index = playerObj.inventory.indexOf('Note With Passcode');
+
+    playerObj.inventory.splice(index, 1);
+    playerObj.usedItems.push('Note With Passcode');
+    playerObj.safe = "Opened";
+
+    // console.log(playerObj.inventory)
+    // console.log(playerObj.usedItems)
+
+    $('.safe_closed').remove();
+    addOpenedSafe();
+    addRope();
+  };
+});
+
+$(document).on('click', '.drawer_key', () => {
+  message(`Drawer Key found!`);
+  $('.drawer_key').remove();
+  playerObj.inventory.push('Drawer Key');
+  console.log(playerObj.inventory);
+});
+
+$(document).on('click', '.rope', () => {
+  message(`Rope found!`);
+  $('.rope').remove();
+  playerObj.inventory.push('Rope');
+  console.log(playerObj.inventory);
+});
+
+$(document).on('click', '.hardwood_door_broken', () => {
+  message(`You Win!!!!!!!!`);
 });
 
 // anime({
