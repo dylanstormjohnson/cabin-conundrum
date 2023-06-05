@@ -33,7 +33,6 @@ a:hover {
   color: white;
 }
 #logo {
-  width: 100px;
   border-radius: 10px;
 }
 
@@ -56,6 +55,20 @@ a:hover {
   z-index: 1;
 }
 
+.inventoryContainer {
+  background-image: url('/images/Sprites/Inventory.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#inventoryTitle {
+  position: absolute;
+  top: 2%;
+  left: 16%;
+}
+
 .message {
   position: absolute;
   color: white;
@@ -68,13 +81,30 @@ a:hover {
   font-weight: 700;
 }
 
+.timer {
+  position: absolute;
+  color: white;
+  top: 5%;
+  left: 90%;
+  transform: translateX(-50%);
+  z-index: 4;
+  font-family: 'IM Fell English SC', serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.selectedGlow {
+  box-shadow: 0 0 10px 5px aquamarine;
+}
+
 .axe {
   position: absolute;
   height: 19%;
   width: auto;
   top: 9%;
   left: 12%;
-  z-index: 2;
+  z-index: 3;
+  transform-origin: 50%, 50%;
 }
 
 .axe_cover {
@@ -83,7 +113,7 @@ a:hover {
   width: auto;
   top: 10.5%;
   left: 11.75%;
-  z-index: 3;
+  z-index: 4;
 }
 
 .trapdoor_closed {
