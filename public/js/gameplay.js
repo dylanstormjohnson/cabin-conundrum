@@ -831,7 +831,40 @@ const endGame = () => {
     currentRoom.attr('src', '/images/Logo/Cabin_Conundrum_Logo.png');
     $('.timer').remove();
   }, 3000);
+
+  //console.log('Game Time:', gameTime);
+  //console.log('Elapsed time:', elapsedTime / 1000, 'seconds');
+  storeScore(elapsedTime / 1000);
 };
+
+async function storeScore(time) {
+  try {
+    const user_id = document
+      .getElementById('gamespace')
+      .getAttribute('user_id');
+    const bodyObj = { user_id, time };
+
+    return console.log(bodyObj);
+    const response = await fetch('/api/scores', {
+      method: 'POST',
+      body: JSON.stringify(bodyObj),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) {
+      const res = await response.json();
+      console.log(res);
+      const errorMsg = res.message;
+      showError(loginFormEl, errorMsg);
+      return;
+    }
+
+    window.location.href = '/';
+  } catch (err) {
+    console.log(err);
+    showError(loginFormEl, 'A login error has ocurred.');
+  }
+}
 
 const removeEverything = () => {
   if ($('.axe')) {
