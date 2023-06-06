@@ -821,7 +821,7 @@ async function storeScore(time) {
       return;
     }
     alert(
-      "check if you're amongs the top 5 players in the gamescore table"
+      "Check if you're among the top 5 players in the gamescore table!!"
     );
   } catch (err) {
     console.log(err);
