@@ -79,6 +79,13 @@ const runGameTimer = () => {
     if (gameRunning === true) {
       elapsedTime++;
 
+      //console.log('Elapsed time:', elapsedTime / 1000, 'seconds');
+      localStorage.setItem('elapsedTime', elapsedTime);
+
+      // if (elapsedTime >= 600000) {
+      //   clearInterval(timer);
+      // }
+
       $('.timer').text(elapsedTime);
     } else {
       gameTime = elapsedTime;
@@ -788,7 +795,38 @@ const endGame = () => {
     currentRoom.attr('src', '/images/Logo/Cabin_Conundrum_Logo.png');
     $('.timer').remove();
   }, 3000);
+
+  //console.log('Game Time:', gameTime);
+  //console.log('Elapsed time:', elapsedTime / 1000, 'seconds');
+  storeScore();
 };
+
+async function storeScore(time) {
+  try {
+    const user_id = document
+      .getElementById('gameSpace')
+      .getAttribute('user_id');
+    const time = Number(localStorage.getItem('elapsedTime'));
+    const bodyObj = { user_id, time };
+
+    const response = await fetch('/api/scores', {
+      method: 'POST',
+      body: JSON.stringify(bodyObj),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!response.ok) {
+      const res = await response.json();
+      console.log(res);
+      return;
+    }
+    alert(
+      "check if you're amongs the top 5 players in the gamescore table"
+    );
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 const removeEverything = () => {
   if ($('.axe')) {

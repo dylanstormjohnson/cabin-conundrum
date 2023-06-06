@@ -1,18 +1,18 @@
 [
   {
     "user_id": 1,
-    "time": "1:00"
+    "time": 20
   },
   {
     "user_id": 2,
-    "time": "3:00"
+    "time": 30
   },
   {
     "user_id": 3,
-    "time": "5:00"
+    "time": 25
   },
   {
     "user_id": 4,
-    "time": "4:00"
+    "time": 34
   }
 ]
