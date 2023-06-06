@@ -13,14 +13,22 @@
       href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
     />
     <link rel='stylesheet' href='/css/style.css' />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap'
+      rel='stylesheet'
+    />
     <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js'></script>
-    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js'
+    <script
+      src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'
+    ></script>
+    <script
+      src='https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js'
       integrity='sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=='
-      crossorigin='anonymous' referrerpolicy='no-referrer'></script>
+      crossorigin='anonymous'
+      referrerpolicy='no-referrer'
+    ></script>
   </head>
   <body>
     <div class=''>
@@ -28,7 +36,7 @@
       <header class=''>
         <h1>
           {{#if logged_in}}
-            <a href='/home'>
+            <a href='/game'>
               <img
                 alt='logo'
                 id='logo'
@@ -49,7 +57,7 @@
           <!-- Conditionally render login or logout links -->
           <a href='/'>Welcome!</a>
           {{#if logged_in}}
-            <a href='/home'>Home</a>
+            <a href='/game'>Game</a>
             <a href='/highscores'>Highscores</a>
             {{#if username}}
               <a href='/profile'>Profile: {{username}}</a>
@@ -73,7 +81,7 @@
     {{#if logged_in}}
       <script src='/js/logout.js'></script>
     {{/if}}
-    {{!-- <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js'></script>
+    {{! <script src='https://code.jquery.com/jquery-3.5.1.slim.min.js'></script>
     <script
       src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'
     ></script>
@@ -82,6 +90,6 @@
       integrity='sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=='
       crossorigin='anonymous'
       referrerpolicy='no-referrer'
-    ></script> --}}
+    ></script> }}
   </body>
 </html>
