@@ -1,6 +1,3 @@
-// const anime = require('animejs');
-// const session = require('express-session');
-
 const playerObj = {
   inventory: [],
   usedItems: [],
@@ -68,8 +65,6 @@ currentRoom.on('click', function (event) {
   if (currentRoom.attr('alt') === 'Logo') {
     currentRoom.attr('alt', 'Living Room');
     currentRoom.attr('src', '/images/Places/Living_Room.png');
-    // currentRoom.attr('src', '/dev_notes/Placement_References/Living_Room_Reference_All_Closed.png');
-    // currentRoom.attr('src', '/dev_notes/Placement_References/Living_Room_Reference_All_Opened.png');
     determineRoomItems();
     gameRunning = true;
     runGameTimer();
@@ -211,7 +206,6 @@ const addClosedTrapdoor = () => {
 };
 
 const addOpenedTrapdoor = () => {
-  console.log('closed');
   const trapdoor = $('<img>');
   trapdoor.attr('src', '/images/Sprites/In_Living_Room/Trapdoor_Opened.png');
   trapdoor.attr('alt', 'Trapdoor');
@@ -361,9 +355,6 @@ $(document).on('click', '.hardwood_door_closed', () => {
 
     playerObj.hardwoodDoor = 'Broken';
 
-    // console.log(playerObj.inventory)
-    // console.log(playerObj.usedItems)
-
     $('.hardwood_door_closed').remove();
     addBrokenHardwoodDoor();
     removeGlow();
@@ -386,9 +377,6 @@ $(document).on('click', '.trapdoor_closed', () => {
     playerObj.inventory.splice(index, 1);
     playerObj.usedItems.push('Basement Key');
     playerObj.trapdoor = 'Opened';
-
-    // console.log(playerObj.inventory)
-    // console.log(playerObj.usedItems)
 
     $('.trapdoor_closed').remove();
     addOpenedTrapdoor();
@@ -414,8 +402,6 @@ $(document).on('click', '.arrowLRtoK', () => {
   clearMessage();
   currentRoom.attr('alt', 'Kitchen');
   currentRoom.attr('src', '/images/Places/Kitchen.png');
-  // currentRoom.attr('src', '/dev_notes/Placement_References/Kitchen_Reference_All_Closed.png');
-  // currentRoom.attr('src', '/dev_notes/Placement_References/Kitchen_Reference_All_Opened.png');
   if (!playerObj.inventory.includes('Axe')) {
     $('.axe').remove();
   }
@@ -478,9 +464,6 @@ $(document).on('click', '.drawer_closed', () => {
     playerObj.usedItems.push('Drawer Key');
     playerObj.drawer = 'Opened';
 
-    // console.log(playerObj.inventory)
-    // console.log(playerObj.usedItems)
-
     $('.drawer_closed').remove();
     addOpenedDrawer();
     addNoteWithPasscode();
@@ -506,8 +489,6 @@ $(document).on('click', '.trapdoor_opened', () => {
   clearMessage();
   currentRoom.attr('alt', 'Basement');
   currentRoom.attr('src', '/images/Places/Basement.png');
-  // currentRoom.attr('src', '/dev_notes/Placement_References/Basement_Reference_All_Closed.png');
-  // currentRoom.attr('src', '/dev_notes/Placement_References/Basement_Reference_All_Opened.png');
   if (!playerObj.inventory.includes('Axe')) {
     $('.axe').remove();
   }
@@ -565,16 +546,12 @@ $(document).on('click', '.arrowBtoLR', () => {
 });
 
 $(document).on('click', '.dirt_mound', () => {
-  console.log(playerObj.activeItem);
   if (playerObj.activeItem === 'None') {
     message(`Looks fresh, I feel uneasy.`);
   } else if (playerObj.activeItem === 'Shovel') {
     message(`You dug something up!`);
 
     playerObj.dirtMound = 'Dug';
-
-    // console.log(playerObj.inventory)
-    // console.log(playerObj.usedItems)
 
     $('.dirt_mound').remove();
     addDugDirtMound();
@@ -598,9 +575,6 @@ $(document).on('click', '.safe_closed', () => {
     playerObj.inventory.splice(index, 1);
     playerObj.usedItems.push('Note With Passcode');
     playerObj.safe = 'Opened';
-
-    // console.log(playerObj.inventory)
-    // console.log(playerObj.usedItems)
 
     $('.safe_closed').remove();
     addOpenedSafe();
@@ -662,12 +636,7 @@ $(document).on('click', '.axe', () => {
       easing: 'easeInOutQuad',
     });
     playerObj.inventory.push('Axe');
-    console.log(playerObj.inventory);
   }
-  // console.log(playerObj.inventory)
-  // console.log(playerObj.usedItems)
-
-  // $('.axe').remove();
 });
 
 $(document).on('click', '.basement_key', () => {
@@ -681,7 +650,6 @@ $(document).on('click', '.basement_key', () => {
       easing: 'easeInOutQuad',
     });
     playerObj.inventory.push('Basement Key');
-    console.log(playerObj.inventory);
   } else {
     removeGlow();
     playerObj.activeItem = 'Basement Key';
@@ -700,7 +668,6 @@ $(document).on('click', '.note_with_passcode', () => {
       easing: 'easeInOutQuad',
     });
     playerObj.inventory.push('Note With Passcode');
-    console.log(playerObj.inventory);
   } else {
     removeGlow();
     playerObj.activeItem = 'Note With Passcode';
@@ -720,7 +687,6 @@ $(document).on('click', '.shovel', () => {
       easing: 'easeInOutQuad',
     });
     playerObj.inventory.push('Shovel');
-    console.log(playerObj.inventory);
   } else {
     removeGlow();
     playerObj.activeItem = 'Shovel';
@@ -739,7 +705,6 @@ $(document).on('click', '.drawer_key', () => {
       easing: 'easeInOutQuad',
     });
     playerObj.inventory.push('Drawer Key');
-    console.log(playerObj.inventory);
   } else {
     removeGlow();
     playerObj.activeItem = 'Drawer Key';
@@ -758,7 +723,6 @@ $(document).on('click', '.rope', () => {
       easing: 'easeInOutQuad',
     });
     playerObj.inventory.push('Rope');
-    console.log(playerObj.inventory);
   } else {
     removeGlow();
     playerObj.activeItem = 'Rope';
@@ -795,7 +759,6 @@ removeGlow = () => {
       $('.axe').removeClass('selectedGlow');
       break;
     case 'Basement Key':
-      console.log('hit');
       $('.basement_key').removeClass('selectedGlow');
       break;
     case 'Note With Passcode':
@@ -927,9 +890,3 @@ const removeEverything = () => {
     $('.dirt_mound_dug').remove();
   }
 };
-// anime({
-//   targets: '.axe',
-//   opacity: 0.5,
-//   duration: 1000,
-//   easing: 'easeInOutQuad',
-// });
