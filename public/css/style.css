@@ -340,3 +340,13 @@ a:hover {
   height: 150px;
   background-color: rgb(98, 37, 10);
 }
+
+.gamePlayContainer {
+  background-color: black;
+}
+
+
+.here {
+background-image: url('../images/wood-3072434_1280.jpg');
+background-size: cover;
+}
