@@ -16,13 +16,13 @@ HighScore.init(
       references: {
         model: 'user',
         key: 'id',
-      }
-    },
-    time: {
-      type: DataTypes.STRING,
-      allowNull: false,
       },
     },
+    time: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+  },
   {
     sequelize,
     timestamps: false,

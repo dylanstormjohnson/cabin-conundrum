@@ -84,7 +84,8 @@ const runGameTimer = () => {
     if (gameRunning === true) {
       elapsedTime++;
 
-      console.log('Elapsed time:', elapsedTime / 1000, 'seconds');
+      //console.log('Elapsed time:', elapsedTime / 1000, 'seconds');
+      localStorage.setItem('elapsedTime', elapsedTime);
 
       // if (elapsedTime >= 600000) {
       //   clearInterval(timer);
@@ -834,17 +835,17 @@ const endGame = () => {
 
   //console.log('Game Time:', gameTime);
   //console.log('Elapsed time:', elapsedTime / 1000, 'seconds');
-  storeScore(elapsedTime / 1000);
+  storeScore();
 };
 
 async function storeScore(time) {
   try {
     const user_id = document
-      .getElementById('gamespace')
+      .getElementById('gameSpace')
       .getAttribute('user_id');
+    const time = Number(localStorage.getItem('elapsedTime'));
     const bodyObj = { user_id, time };
 
-    return console.log(bodyObj);
     const response = await fetch('/api/scores', {
       method: 'POST',
       body: JSON.stringify(bodyObj),
@@ -854,15 +855,13 @@ async function storeScore(time) {
     if (!response.ok) {
       const res = await response.json();
       console.log(res);
-      const errorMsg = res.message;
-      showError(loginFormEl, errorMsg);
       return;
     }
-
-    window.location.href = '/';
+    alert(
+      "check if you're amongs the top 5 players in the gamescore table"
+    );
   } catch (err) {
     console.log(err);
-    showError(loginFormEl, 'A login error has ocurred.');
   }
 }
 

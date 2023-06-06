@@ -7,3 +7,4 @@ CREATE TABLE inventory (
   name VARCHAR(100) NOT NULL,
   PRIMARY KEY (id)
 );
+
