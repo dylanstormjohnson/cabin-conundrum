@@ -76,19 +76,30 @@ const creepyFaceAnimationWait = () => {
 };
 
 const creepyFaceAnimation = () => {
-    let randomInt;
+  let randomInt;
   creepyAnimationTime = setInterval(() => {
     randomInt = getRandomInt();
-    console.log(randomInt)
+    console.log(randomInt);
     if (randomInt <= 5) {
       clearInterval(creepyAnimationTime);
-      addCreepyFaceEyesOpen()
+      addCreepyFaceEyesOpen();
       creepyAnimationWaitTime = setTimeout(() => {
         $('.creepy_face_eyes_open').remove();
         creepyFaceAnimationWait();
       }, 2000);
     }
   }, 1000);
+};
+
+const endCreepyFaceAnimation = () => {
+  clearInterval(creepyAnimationWaitTime);
+  clearInterval(creepyAnimationTime);
+  if ($('.creepy_face_eyes_open')) {
+    $('.creepy_face_eyes_open').remove();
+  }
+  if ($('.creepy_face_eyes_closed')) {
+    $('.creepy_face_eyes_closed').remove();
+  }
 };
 
 currentRoom.on('click', function (event) {
@@ -619,6 +630,7 @@ $(document).on('click', '.arrowBtoLR', () => {
   }
 
   $('.arrowBtoLR').remove();
+  endCreepyFaceAnimation();
 
   if (playerObj.dirtMound !== 'Dug') {
     $('.dirt_mound').remove();
@@ -1034,5 +1046,17 @@ const removeEverything = () => {
   }
   if ($('.dirt_mound_dug')) {
     $('.dirt_mound_dug').remove();
+  }
+  if ($('.bees')) {
+    $('.bees').remove();
+  }
+  if ($('.umbrella')) {
+    $('.umbrella').remove();
+  }
+  if ($('.creepy_face_eyes_open')) {
+    $('.creepy_face_eyes_open').remove();
+  }
+  if ($('.creepy_face_eyes_closed')) {
+    $('.creepy_face_eyes_closed').remove();
   }
 };
