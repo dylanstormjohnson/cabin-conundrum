@@ -16,6 +16,8 @@ let isMessage = false;
 let messageTime;
 let gameTime;
 let gameRunning = false;
+let creepyAnimationWaitTime;
+let creepyAnimationTime;
 
 const message = (description) => {
   if (!isMessage) {
@@ -59,6 +61,34 @@ const shortMessage = (whereTo) => {
 const clearMessage = () => {
   isMessage = false;
   $('.message').remove();
+};
+
+const getRandomInt = () => {
+  min = Math.ceil(1);
+  max = Math.floor(101);
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const creepyFaceAnimationWait = () => {
+  creepyAnimationWaitTime = setTimeout(() => {
+    creepyFaceAnimation();
+  }, 15000);
+};
+
+const creepyFaceAnimation = () => {
+    let randomInt;
+  creepyAnimationTime = setInterval(() => {
+    randomInt = getRandomInt();
+    console.log(randomInt)
+    if (randomInt <= 5) {
+      clearInterval(creepyAnimationTime);
+      addCreepyFaceEyesOpen()
+      creepyAnimationWaitTime = setTimeout(() => {
+        $('.creepy_face_eyes_open').remove();
+        creepyFaceAnimationWait();
+      }, 2000);
+    }
+  }, 1000);
 };
 
 currentRoom.on('click', function (event) {
@@ -115,6 +145,7 @@ const fillLivingRoom = () => {
 
   addAxeCover();
   addArrowLRToK();
+  addEasterEggs();
 
   if (playerObj.trapdoor !== 'Opened') {
     addClosedTrapdoor();
@@ -138,6 +169,7 @@ const fillKitchen = () => {
   }
 
   addArrowKToLR();
+  addEasterEggs();
 
   if (playerObj.drawer !== 'Opened') {
     addClosedDrawer();
@@ -158,6 +190,8 @@ const fillBasement = () => {
   }
 
   addArrowBToLR();
+  addEasterEggs();
+  creepyFaceAnimationWait();
 
   if (playerObj.dirtMound !== 'Dug') {
     addUndugDirtMound();
@@ -178,6 +212,20 @@ const fillBasement = () => {
     if (!playerObj.inventory.includes('Rope')) {
       addRope();
     }
+  }
+};
+
+const addEasterEggs = () => {
+  switch (currentRoom.attr('alt')) {
+    case 'Living Room':
+      addBees();
+      break;
+    case 'Kitchen':
+      addUmbrella();
+      break;
+    case 'Basement':
+      addCreepyFaceEyesClosed();
+      break;
   }
 };
 
@@ -347,6 +395,49 @@ const addDugDirtMound = () => {
   gameSpace.append(dirtMound);
 };
 
+const addUmbrella = () => {
+  const umbrella = $('<img>');
+  umbrella.attr('src', '/images/Sprites/Easter_Eggs/In_Kitchen/Umbrella.png');
+  umbrella.attr('alt', 'Umbrella Easter Egg');
+  umbrella.addClass('umbrella');
+  gameSpace.append(umbrella);
+};
+
+const addBees = () => {
+  const bee1 = $('<img>');
+  bee1.attr('src', '/images/Sprites/Easter_Eggs/In_Living_Room/Bee_Right.png');
+  bee1.attr('alt', 'Bee 1 Easter Egg');
+  bee1.addClass('bee_right bees');
+  gameSpace.append(bee1);
+  const bee2 = $('<img>');
+  bee2.attr('src', '/images/Sprites/Easter_Eggs/In_Living_Room/Bee_Left.png');
+  bee2.attr('alt', 'Bee 2 Easter Egg');
+  bee2.addClass('bee_left bees');
+  gameSpace.append(bee2);
+};
+
+const addCreepyFaceEyesClosed = () => {
+  const creepyFaceEyesClosed = $('<img>');
+  creepyFaceEyesClosed.attr(
+    'src',
+    '/images/Sprites/Easter_Eggs/In_Basement/Creepy_Face_Eyes_Closed.png'
+  );
+  creepyFaceEyesClosed.attr('alt', 'Creepy Face With Closed Eyes Easter Egg');
+  creepyFaceEyesClosed.addClass('creepy_face_eyes_closed');
+  gameSpace.append(creepyFaceEyesClosed);
+};
+
+const addCreepyFaceEyesOpen = () => {
+  const creepyFaceEyesOpen = $('<img>');
+  creepyFaceEyesOpen.attr(
+    'src',
+    '/images/Sprites/Easter_Eggs/In_Basement/Creepy_Face_Eyes_Open.png'
+  );
+  creepyFaceEyesOpen.attr('alt', 'Creepy Face With Open Eyes Easter Egg');
+  creepyFaceEyesOpen.addClass('creepy_face_eyes_open');
+  gameSpace.append(creepyFaceEyesOpen);
+};
+
 $(document).on('click', '.hardwood_door_closed', () => {
   if (playerObj.activeItem === 'None') {
     message(`It's locked...`);
@@ -408,6 +499,8 @@ $(document).on('click', '.arrowLRtoK', () => {
 
   $('.axe_cover').remove();
   $('.arrowLRtoK').remove();
+  $('.bee_right').remove();
+  $('.bee_left').remove();
 
   if (playerObj.trapdoor !== 'Opened') {
     $('.trapdoor_closed').remove();
@@ -440,6 +533,7 @@ $(document).on('click', '.arrowKtoLR', () => {
   }
 
   $('.arrowKtoLR').remove();
+  $('.umbrella').remove();
 
   if (playerObj.drawer !== 'Opened') {
     $('.drawer_closed').remove();
@@ -496,6 +590,8 @@ $(document).on('click', '.trapdoor_opened', () => {
   $('.axe_cover').remove();
   $('.arrowLRtoK').remove();
   $('.trapdoor_opened').remove();
+  $('.bee_right').remove();
+  $('.bee_left').remove();
 
   if (playerObj.hardwoodDoor !== 'Broken') {
     $('.hardwood_door_closed').remove();
@@ -623,9 +719,15 @@ $(document).on('click', '.axe', () => {
       playerObj.activeItem = 'None';
     }
   } else if (playerObj.inventory.includes('Axe')) {
-    removeGlow();
-    playerObj.activeItem = 'Axe';
-    addGlow();
+    if (!(playerObj.activeItem === 'Axe')) {
+      removeGlow();
+      playerObj.activeItem = 'Axe';
+      addGlow();
+    } else {
+      removeGlow();
+      playerObj.activeItem = 'None';
+      console.log(playerObj.activeItem);
+    }
   } else {
     message(`Axe found!`);
     anime({
@@ -651,9 +753,15 @@ $(document).on('click', '.basement_key', () => {
     });
     playerObj.inventory.push('Basement Key');
   } else {
-    removeGlow();
-    playerObj.activeItem = 'Basement Key';
-    addGlow();
+    if (!(playerObj.activeItem === 'Basement Key')) {
+      removeGlow();
+      playerObj.activeItem = 'Basement Key';
+      addGlow();
+    } else {
+      removeGlow();
+      playerObj.activeItem = 'None';
+      console.log(playerObj.activeItem);
+    }
   }
 });
 
@@ -669,9 +777,15 @@ $(document).on('click', '.note_with_passcode', () => {
     });
     playerObj.inventory.push('Note With Passcode');
   } else {
-    removeGlow();
-    playerObj.activeItem = 'Note With Passcode';
-    addGlow();
+    if (!(playerObj.activeItem === 'Note With Passcode')) {
+      removeGlow();
+      playerObj.activeItem = 'Note With Passcode';
+      addGlow();
+    } else {
+      removeGlow();
+      playerObj.activeItem = 'None';
+      console.log(playerObj.activeItem);
+    }
   }
 });
 
@@ -688,9 +802,15 @@ $(document).on('click', '.shovel', () => {
     });
     playerObj.inventory.push('Shovel');
   } else {
-    removeGlow();
-    playerObj.activeItem = 'Shovel';
-    addGlow();
+    if (!(playerObj.activeItem === 'Shovel')) {
+      removeGlow();
+      playerObj.activeItem = 'Shovel';
+      addGlow();
+    } else {
+      removeGlow();
+      playerObj.activeItem = 'None';
+      console.log(playerObj.activeItem);
+    }
   }
 });
 
@@ -706,9 +826,15 @@ $(document).on('click', '.drawer_key', () => {
     });
     playerObj.inventory.push('Drawer Key');
   } else {
-    removeGlow();
-    playerObj.activeItem = 'Drawer Key';
-    addGlow();
+    if (!(playerObj.activeItem === 'Drawer Key')) {
+      removeGlow();
+      playerObj.activeItem = 'Drawer Key';
+      addGlow();
+    } else {
+      removeGlow();
+      playerObj.activeItem = 'None';
+      console.log(playerObj.activeItem);
+    }
   }
 });
 
@@ -724,10 +850,32 @@ $(document).on('click', '.rope', () => {
     });
     playerObj.inventory.push('Rope');
   } else {
-    removeGlow();
-    playerObj.activeItem = 'Rope';
-    addGlow();
+    if (!(playerObj.activeItem === 'Rope')) {
+      removeGlow();
+      playerObj.activeItem = 'Rope';
+      addGlow();
+    } else {
+      removeGlow();
+      playerObj.activeItem = 'None';
+      console.log(playerObj.activeItem);
+    }
   }
+});
+
+$(document).on('click', '.umbrella', () => {
+  message(`Who am I, Mary Poppins?`);
+});
+
+$(document).on('click', '.bees', () => {
+  message(`BEES!?‽`);
+});
+
+$(document).on('click', '.creepy_face_eyes_closed', () => {
+  message(`I hate that someone drew a face here...`);
+});
+
+$(document).on('click', '.creepy_face_eyes_open', () => {
+  message(`I'm being watched...`);
 });
 
 addGlow = () => {
@@ -820,9 +968,7 @@ async function storeScore(time) {
       console.log(res);
       return;
     }
-    alert(
-      "Check if you're among the top 5 players in the gamescore table!!"
-    );
+    alert("Check if you're among the top 5 players in the gamescore table!!");
   } catch (err) {
     console.log(err);
   }
