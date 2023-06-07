@@ -278,6 +278,51 @@ a:hover {
   z-index: 2;
 }
 
+.umbrella {
+  position: absolute;
+  height: 25%;
+  width: auto;
+  top: 25%;
+  left: 81%;
+  z-index: 2;
+}
+
+.bee_right {
+  position: absolute;
+  height: 2%;
+  width: auto;
+  top: 20%;
+  left: 62%;
+  z-index: 2;
+}
+
+.bee_left {
+  position: absolute;
+  height: 2%;
+  width: auto;
+  top: 19.5%;
+  left: 54%;
+  z-index: 2;
+}
+
+.creepy_face_eyes_open {
+  position: absolute;
+  height: 5%;
+  width: auto;
+  top: 38%;
+  left: 14%;
+  z-index: 2;
+}
+
+.creepy_face_eyes_closed {
+  position: absolute;
+  height: 5%;
+  width: auto;
+  top: 38%;
+  left: 14%;
+  z-index: 2;
+}
+
 .highscores-container {
   display: flex;
   flex-direction: column;
