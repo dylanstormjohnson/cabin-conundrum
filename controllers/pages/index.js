@@ -14,8 +14,8 @@ router.use('/highscores', withAuth, highscores);
 router.use('/login', login);
 
 //need to add withAuth to line below
-router.use('/game', withAuth, game);
-
+router.use('/game', game);
+// withAuth,
 router.get('/', (req, res) => {
   res.render('welcome', { logged_in: req.session.logged_in });
 });

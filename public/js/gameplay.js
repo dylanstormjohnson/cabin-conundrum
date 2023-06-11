@@ -106,6 +106,7 @@ currentRoom.on('click', function (event) {
   if (currentRoom.attr('alt') === 'Logo') {
     currentRoom.attr('alt', 'Living Room');
     currentRoom.attr('src', '/images/Places/Living_Room.png');
+
     determineRoomItems();
     gameRunning = true;
     runGameTimer();
@@ -504,6 +505,7 @@ $(document).on('click', '.arrowLRtoK', () => {
   clearMessage();
   currentRoom.attr('alt', 'Kitchen');
   currentRoom.attr('src', '/images/Places/Kitchen.png');
+
   if (!playerObj.inventory.includes('Axe')) {
     $('.axe').remove();
   }
@@ -594,6 +596,7 @@ $(document).on('click', '.trapdoor_opened', () => {
   clearMessage();
   currentRoom.attr('alt', 'Basement');
   currentRoom.attr('src', '/images/Places/Basement.png');
+
   if (!playerObj.inventory.includes('Axe')) {
     $('.axe').remove();
   }
@@ -709,18 +712,46 @@ $(document).on('click', '.axe', () => {
     } else if (playerObj.activeItem === 'Rope') {
       message(`You knocked the axe down!`);
 
-      anime({
-        targets: '.axe',
-        keyframes: [
-          { rotateZ: 15, duration: 500 },
-          {
-            translateX: 100,
-            translateY: 413,
-            duration: 500,
-          },
-        ],
-        easing: 'linear',
-      });
+      if (window.innerWidth < 1280) {
+        anime({
+          targets: '.axe',
+          keyframes: [
+            { rotateZ: 15, duration: 500 },
+            {
+              translateX: 100,
+              translateY: 350,
+              duration: 500,
+            },
+          ],
+          easing: 'linear',
+        });
+      } else if (window.innerWidth >= 900 && window.innerWidth < 1920) {
+        anime({
+          targets: '.axe',
+          keyframes: [
+            { rotateZ: 15, duration: 500 },
+            {
+              translateX: 100,
+              translateY: 310,
+              duration: 500,
+            },
+          ],
+          easing: 'linear',
+        });
+      } else {
+        anime({
+          targets: '.axe',
+          keyframes: [
+            { rotateZ: 15, duration: 500 },
+            {
+              translateX: 100,
+              translateY: 413,
+              duration: 500,
+            },
+          ],
+          easing: 'linear',
+        });
+      }
 
       playerObj.axe = 'Unstuck';
       removeGlow();
@@ -742,13 +773,33 @@ $(document).on('click', '.axe', () => {
     }
   } else {
     message(`Axe found!`);
-    anime({
-      targets: '.axe',
-      translateX: 1000,
-      translateY: 125,
-      duration: 500,
-      easing: 'easeInOutQuad',
-    });
+
+    if (window.innerWidth < 1280) {
+      anime({
+        targets: '.axe',
+        translateX: 600,
+        translateY: 500,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else if (window.innerWidth >= 900 && window.innerWidth < 1920) {
+      anime({
+        targets: '.axe',
+        translateX: 740,
+        translateY: 100,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else {
+      anime({
+        targets: '.axe',
+        translateX: 975,
+        translateY: 125,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    }
+
     playerObj.inventory.push('Axe');
   }
 });
@@ -756,13 +807,33 @@ $(document).on('click', '.axe', () => {
 $(document).on('click', '.basement_key', () => {
   if (!playerObj.inventory.includes('Basement Key')) {
     message(`Basement Key found!`);
-    anime({
-      targets: '.basement_key',
-      translateX: 1025,
-      translateY: -50,
-      duration: 500,
-      easing: 'easeInOutQuad',
-    });
+
+    if (window.innerWidth < 1279) {
+      anime({
+        targets: '.basement_key',
+        translateX: 100,
+        translateY: 550,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else if (window.innerWidth >= 900 && window.innerWidth < 1920) {
+      anime({
+        targets: '.basement_key',
+        translateX: 755,
+        translateY: -15,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else {
+      anime({
+        targets: '.basement_key',
+        translateX: 1000,
+        translateY: -75,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    }
+
     playerObj.inventory.push('Basement Key');
   } else {
     if (!(playerObj.activeItem === 'Basement Key')) {
@@ -780,13 +851,33 @@ $(document).on('click', '.basement_key', () => {
 $(document).on('click', '.note_with_passcode', () => {
   if (!playerObj.inventory.includes('Note With Passcode')) {
     message(`Note with passcode found!`);
-    anime({
-      targets: '.note_with_passcode',
-      translateX: 647,
-      translateY: 38,
-      duration: 500,
-      easing: 'easeInOutQuad',
-    });
+
+    if (window.innerWidth < 1279) {
+      anime({
+        targets: '.note_with_passcode',
+        translateX: -17,
+        translateY: 465,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else if (window.innerWidth >= 900 && window.innerWidth < 1920) {
+      anime({
+        targets: '.note_with_passcode',
+        translateX: 470,
+        translateY: 25,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else {
+      anime({
+        targets: '.note_with_passcode',
+        translateX: 622,
+        translateY: 13,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    }
+
     playerObj.inventory.push('Note With Passcode');
   } else {
     if (!(playerObj.activeItem === 'Note With Passcode')) {
@@ -804,14 +895,36 @@ $(document).on('click', '.note_with_passcode', () => {
 $(document).on('click', '.shovel', () => {
   if (!playerObj.inventory.includes('Shovel')) {
     message(`Shovel found!`);
-    anime({
-      targets: '.shovel',
-      translateX: 430,
-      translateY: -280,
-      height: '25%',
-      duration: 500,
-      easing: 'easeInOutQuad',
-    });
+
+    if (window.innerWidth < 1279) {
+      anime({
+        targets: '.shovel',
+        translateX: -425,
+        translateY: 375,
+        height: '25%',
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else if (window.innerWidth >= 900 && window.innerWidth < 1920) {
+      anime({
+        targets: '.shovel',
+        translateX: 310,
+        translateY: -190,
+        height: '25%',
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else {
+      anime({
+        targets: '.shovel',
+        translateX: 405,
+        translateY: -305,
+        height: '25%',
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    }
+
     playerObj.inventory.push('Shovel');
   } else {
     if (!(playerObj.activeItem === 'Shovel')) {
@@ -829,13 +942,33 @@ $(document).on('click', '.shovel', () => {
 $(document).on('click', '.drawer_key', () => {
   if (!playerObj.inventory.includes('Drawer Key')) {
     message(`Drawer Key found!`);
-    anime({
-      targets: '.drawer_key',
-      translateX: 750,
-      translateY: -300,
-      duration: 500,
-      easing: 'easeInOutQuad',
-    });
+
+    if (window.innerWidth < 1279) {
+      anime({
+        targets: '.drawer_key',
+        translateX: 75,
+        translateY: 175,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else if (window.innerWidth >= 900 && window.innerWidth < 1920) {
+      anime({
+        targets: '.drawer_key',
+        translateX: 550,
+        translateY: -225,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else {
+      anime({
+        targets: '.drawer_key',
+        translateX: 725,
+        translateY: -325,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    }
+
     playerObj.inventory.push('Drawer Key');
   } else {
     if (!(playerObj.activeItem === 'Drawer Key')) {
@@ -853,13 +986,33 @@ $(document).on('click', '.drawer_key', () => {
 $(document).on('click', '.rope', () => {
   if (!playerObj.inventory.includes('Rope')) {
     message(`Rope found!`);
-    anime({
-      targets: '.rope',
-      translateX: 615,
-      translateY: 125,
-      duration: 500,
-      easing: 'easeInOutQuad',
-    });
+
+    if (window.innerWidth < 1279) {
+      anime({
+        targets: '.rope',
+        translateX: -40,
+        translateY: 540,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else if (window.innerWidth >= 900 && window.innerWidth < 1920) {
+      anime({
+        targets: '.rope',
+        translateX: 450,
+        translateY: 95,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    } else {
+      anime({
+        targets: '.rope',
+        translateX: 590,
+        translateY: 100,
+        duration: 500,
+        easing: 'easeInOutQuad',
+      });
+    }
+
     playerObj.inventory.push('Rope');
   } else {
     if (!(playerObj.activeItem === 'Rope')) {
@@ -887,7 +1040,7 @@ $(document).on('click', '.creepy_face_eyes_closed', () => {
 });
 
 $(document).on('click', '.creepy_face_eyes_open', () => {
-  message(`I'm being watched...`);
+  message(`You're being watched...`);
 });
 
 addGlow = () => {
